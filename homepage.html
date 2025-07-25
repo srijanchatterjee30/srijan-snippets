@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Srijan’s Interactive Home</title>
+
+  <!-- Example: Google Fonts + a framework -->
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&family=Indie+Flower&display=swap" rel="stylesheet"/>
+  <style>
+    body { margin:0; font-family:Comfortaa, sans-serif; }
+    nav { position:fixed; top:0; width:100%; background:rgba(255,255,255,0.8); padding:10px; text-align:center; z-index:10; }
+    section { min-height:100vh; display:flex; align-items:center; justify-content:center; }
+    #section1, #section2 { position:relative; }
+    /* … your CSS from Sections 1 & 2 … */
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="#section1">Welcome</a> |
+    <a href="#section2">Explore</a> |
+    <a href="#section3">Next</a>
+  </nav>
+
+  <section id="section1">
+    <!-- Paste your Section 1 HTML + animations here -->
+  </section>
+
+  <section id="section2">
+    <!-- Paste your Section 2 HTML + background + JS here -->
+  </section>
+
+  <section id="section3">
+    <!-- Build Section 3 … -->
+    <h2>Coming Soon</h2>
+  </section>
+
+  <!-- Your IntersectionObserver script can go here once to kick off each section -->
+  <script>
+    document.querySelectorAll('section').forEach(sec => {
+      new IntersectionObserver((entries, obs) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            sec.classList.add('visible');
+            obs.unobserve(sec);
+          }
+        });
+      }, { threshold: 0.3 }).observe(sec);
+    });
+  </script>
+</body>
+</html>
