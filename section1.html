@@ -1,83 +1,168 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Section 1: Welcome</title>
-  
-  <!-- Import Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&family=Indie+Flower&family=Cedarville+Cursive&display=swap" rel="stylesheet">
+  <title>Section 1: Cinematic Welcome</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&family=Indie+Flower&family=Cedarville+Cursive&display=swap" rel="stylesheet"/>
 
   <style>
+    /* Reset & transparent background */
     html, body {
-      margin: 0;
-      padding: 0;
+      margin: 0; padding: 0;
       background: transparent;
-      font-smoothing: antialiased;
-      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
 
+    /* Container */
     .container {
       display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
-      height: 100vh;
+      justify-content: center;
+      padding: 100px 20px;
       text-align: center;
-      opacity: 0;
-      transform: translateY(40px);
-      transition: all 0.8s ease;
     }
 
-    .container.visible {
-      opacity: 1;
-      transform: translateY(0px);
-    }
-
-    .line1 {
+    /* Quote marks */
+    .quote {
       font-family: 'Comfortaa', sans-serif;
-      font-size: 30px;
-      margin: 10px 0;
+      font-size: 33px;
+      vertical-align: middle;
     }
 
-    .line2 {
+    /* Initial hidden state */
+    .line1, .line2, .line3 {
+      opacity: 0;
+      transform: translateY(60px);
+    }
+    .dot, .well-dot {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(-20px);
+      margin: 0 1px;
+    }
+    .rest {
+      display: inline-block;
+      opacity: 0;
+      transform: translateX(-30px);
+      margin-left: 4px;
+    }
+
+    /* Keyframes */
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes dotDrop {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes dotWave {
+      0%,100% { transform: translateY(0); }
+      50%      { transform: translateY(-8px); }
+    }
+    @keyframes slideIn {
+      to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes shimmer {
+      0%   { left: -75%; }
+      100% { left: 125%; }
+    }
+
+    /* Scroll-triggered animations */
+    .visible .line1 {
+      font-family: 'Comfortaa', sans-serif;
+      font-size: 33px;
+      animation: fadeUp 1.5s ease-out 0.5s forwards;
+      margin-bottom: 40px;
+    }
+    .visible .line2 {
       font-family: 'Indie Flower', cursive;
       font-weight: bold;
       font-size: 30px;
-      margin: 10px 0;
+      display: inline-block;
+      animation: fadeUp 1.5s ease-out 2s forwards;
+      margin-bottom: 30px;
+    }
+    .visible .dot1 {
+      animation:
+        dotDrop 0.5s ease-out 3.6s forwards,
+        dotWave 0.8s ease-in-out 4.1s 3 forwards;
+    }
+    .visible .dot2 {
+      animation:
+        dotDrop 0.5s ease-out 3.9s forwards,
+        dotWave 0.8s ease-in-out 4.4s 3 forwards;
+    }
+    .visible .dot3 {
+      animation:
+        dotDrop 0.5s ease-out 4.2s forwards,
+        dotWave 0.8s ease-in-out 4.7s 3 forwards;
+    }
+    .visible .line3 {
+      font-family: 'Cedarville Cursive', cursive;
+      font-size: 33px;
+      animation: fadeUp 1.5s ease-out 5.3s forwards;
+    }
+    .visible .well-dot1 {
+      animation: dotDrop 0.5s ease-out 5.8s forwards;
+    }
+    .visible .well-dot2 {
+      animation: dotDrop 0.5s ease-out 6.1s forwards;
+    }
+    .visible .well-dot3 {
+      animation: dotDrop 0.5s ease-out 6.4s forwards;
+    }
+    .visible .rest {
+      animation: slideIn 1s ease-out 6.7s forwards;
     }
 
-    .line3 {
-      font-family: 'Cedarville Cursive', cursive;
-      font-size: 25px;
-      margin: 10px 0;
+    /* Hover shimmer */
+    .line1::after,
+    .line2::after,
+    .line3::after {
+      content: "";
+      position: absolute;
+      top: 0; left: -75%;
+      width: 50%; height: 100%;
+      background: linear-gradient(120deg, transparent, rgba(255,255,255,0.4), transparent);
+      transform: skewX(-20deg);
+      pointer-events: none;
+    }
+    .line1:hover::after,
+    .line2:hover::after,
+    .line3:hover::after {
+      animation: shimmer 1s ease forwards;
     }
   </style>
 </head>
-
 <body>
-  <div class="container" id="section1">
-    <div class="line1">Hey, I'm Srijan!</div>
-    <div class="line2">"A trace of followed thoughts, lived questions, and moments I'm still trying to name through the strife...</div>
-    <div class="line3">Not everything here will make sense. Well..., neither does life."</div>
+  <div class="container" id="container">
+    <div class="line1">Hey, I’m Srijan!</div>
+    <div class="line2">
+      <span class="quote">&ldquo;</span>
+      A trace of followed thoughts, lived questions,
+      and moments I’m still trying to name through the strife
+      <span class="dot dot1">.</span><span class="dot dot2">.</span><span class="dot dot3">.</span>
+    </div>
+    <div class="line3">
+      Not everything here will make sense. Well
+      <span class="well-dot well-dot1">.</span><span class="well-dot well-dot2">.</span><span class="well-dot well-dot3">.</span>
+      <span class="rest">neither does life<span class="quote">&rdquo;</span></span>
+    </div>
   </div>
 
   <script>
-    const section = document.getElementById('section1');
-
+    // Only works inside iframe/embed on GitHub Pages
+    const container = document.getElementById('container');
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          section.classList.add('visible');
-        } else {
-          section.classList.remove('visible');
-        }
+        if (entry.isIntersecting) container.classList.add('visible');
+        else container.classList.remove('visible');
       });
-    }, {
-      threshold: 0.4
-    });
-
-    observer.observe(section);
+    }, { threshold: 0.4 });
+    observer.observe(container);
   </script>
 </body>
 </html>
