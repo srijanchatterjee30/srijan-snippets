@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Section 1: Welcome</title>
+  
+  <!-- Import Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&family=Indie+Flower&family=Cedarville+Cursive&display=swap" rel="stylesheet">
+
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: transparent;
+      font-smoothing: antialiased;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.8s ease;
+    }
+
+    .container.visible {
+      opacity: 1;
+      transform: translateY(0px);
+    }
+
+    .line1 {
+      font-family: 'Comfortaa', sans-serif;
+      font-size: 30px;
+      margin: 10px 0;
+    }
+
+    .line2 {
+      font-family: 'Indie Flower', cursive;
+      font-weight: bold;
+      font-size: 30px;
+      margin: 10px 0;
+    }
+
+    .line3 {
+      font-family: 'Cedarville Cursive', cursive;
+      font-size: 25px;
+      margin: 10px 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container" id="section1">
+    <div class="line1">Hey, I'm Srijan!</div>
+    <div class="line2">"A trace of followed thoughts, lived questions, and moments I'm still trying to name through the strife...</div>
+    <div class="line3">Not everything here will make sense. Well..., neither does life."</div>
+  </div>
+
+  <script>
+    const section = document.getElementById('section1');
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          section.classList.add('visible');
+        } else {
+          section.classList.remove('visible');
+        }
+      });
+    }, {
+      threshold: 0.4
+    });
+
+    observer.observe(section);
+  </script>
+</body>
+</html>
